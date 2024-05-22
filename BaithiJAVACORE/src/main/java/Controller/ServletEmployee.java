@@ -36,12 +36,7 @@ public class ServletEmployee extends HttpServlet {
                 case "/insert":
                     insertEmployee(request, response);
                     break;
-//                case "/delete":
-//                    deleteUser(request, response);
-//                    break;
-//                case "/edit":
-//                    showEditForm(request, response);
-//                    break;
+//
                 default:
                     listEmployees(request, response);
                     break;
@@ -84,19 +79,5 @@ public class ServletEmployee extends HttpServlet {
         response.sendRedirect("list");
     }
 
-//    private void updateUser(HttpServletRequest request, HttpServletResponse response) throws SQLException, ClassNotFoundException, IOException {
-//        int id = Integer.parseInt(request.getParameter("id"));
-//        String name = request.getParameter("name");
-//        String email = request.getParameter("email");
-//        String country = request.getParameter("country");
-//        User user = new User(id, name, email, country);
-//        userDAO.updateUser(user);
-//        response.sendRedirect("list");
-//    }
-//
-//    private void deleteUser(HttpServletRequest request, HttpServletResponse response) throws SQLException, ClassNotFoundException, IOException {
-//        int id = Integer.parseInt(request.getParameter("id"));
-//        userDAO.delete(id);
-//        response.sendRedirect("list");
-//    }
+
 }

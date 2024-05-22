@@ -12,8 +12,7 @@ public class EmployeeDAO {
 
     private static final String INSERT_EMPLOYEE_SQL = "INSERT INTO Employee (CMND, Full_Name, Birthday, Address, Position, Department) VALUES (?, ?, ?, ?, ?, ?)";
     private static final String SELECT_ALL_EMPLOYEES = "SELECT * FROM employee";
-    private static final String DELETE_EMPLOYEE_SQL = "DELETE FROM users WHERE id = ?;";
-    private static final String UPDATE_EMPLOYEE_SQL = "UPDATE users set name = ?, email= ?, country =? WHERE id = ?";
+
     public EmployeeDAO() {
 
     }
@@ -63,26 +62,6 @@ public class EmployeeDAO {
         return employees;
     }
 
-//    public boolean delete(int id) throws  SQLException, ClassNotFoundException{
-//        boolean rowDelete;
-//        Connection connection = getConnection();
-//        PreparedStatement statement = connection.prepareStatement();
-//        statement.setInt(1, id);
-//        rowDelete = statement.executeUpdate() > 0;
-//        return rowDelete;
-//    }
-//
-//    public boolean updateUser(User user) throws SQLException, ClassNotFoundException {
-//        boolean rowUpdate;
-//        Connection connection = getConnection();
-//        PreparedStatement statement = connection.prepareStatement();
-//        statement.setString(1, user.getName());
-//        statement.setString(2, user.getEmail());
-//        statement.setString(3, user.getCountry());
-//        statement.setInt(4, user.getId());
-//        rowUpdate = statement.executeUpdate() > 0;
-//        return rowUpdate;
-//
-//    }
+
 
 }
