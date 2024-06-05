@@ -1,0 +1,43 @@
+<!-- vehicle.html -->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Management</title>
+    <!-- Add Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h2>Vehicle List</h2>
+
+    <!-- Vehicle Table -->
+    <table class="table mt-4">
+        <thead>
+        <tr>
+            <th>Vehicle Name</th>
+            <th>Vehicle Model</th>
+            <th>Year of Manufacture</th>
+            <th>Vehicle Color</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Vehicle List Goes Here -->
+        <tr th:each="vehicle : ${vehicles}">
+            <td th:text="${vehicle.vehicleName}"></td>
+            <td th:text="${vehicle.vehicleModel}"></td>
+            <td th:text="${vehicle.yearOfManufacture}"></td>
+            <td th:text="${vehicle.vehicleColor}"></td>
+            <td>
+
+        </tr>
+        </tbody>
+    </table>
+</div>
+<!-- Add Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
