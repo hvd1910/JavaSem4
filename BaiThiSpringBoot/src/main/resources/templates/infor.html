@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Information</title>
+</head>
+<body>
+<h2>Vehicle Information</h2>
+Welcome sale <span th:text="${session.userId}"></span><br>
+<a href="/logout">Logout</a><br>
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Model</th>
+        <th>Year of Manufacture</th>
+        <th>Color</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Iterate through vehicles and display information -->
+    <th:block th:each="vehicle : ${vehicles}">
+        <tr>
+            <td th:text="${vehicle.id}"></td>
+            <td th:text="${vehicle.name}"></td>
+            <td th:text="${vehicle.model}"></td>
+            <td th:text="${vehicle.yearOfManufacture}"></td>
+            <td th:text="${vehicle.color}"></td>
+        </tr>
+    </th:block>
+    </tbody>
+</table>
+</body>
+</html>
