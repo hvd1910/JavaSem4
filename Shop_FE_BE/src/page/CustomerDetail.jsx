@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Grid, Card, CardContent, Typography, CircularProgress, Container, Paper, Box, Divider, Button } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
+import SelectInputBase from './SelectInputBase';
 
 const CustomerDetail = () => {
     const { customerId } = useParams(); // Giả sử bạn lấy ID người dùng từ URL
@@ -22,11 +23,12 @@ const CustomerDetail = () => {
         };
 
         fetchOrders();
-    }, [customerId]);
+    }, [customerId, loading]);
 
-    if (loading) {
-        return <CircularProgress />;
+    const onLoad = () => {
+      setLoading(!loading)
     }
+    
 
     return (
         
@@ -66,7 +68,7 @@ const CustomerDetail = () => {
                         <Typography variant="subtitle2" color="textSecondary">
                           Status
                         </Typography>
-                        <Typography variant="body1">{order.status}</Typography>
+                        <SelectInputBase initialValue={order?.status} idObject={order.id} onLoad={onLoad}/>
                       </Grid>
                       <Grid item xs={12} sm={1}>
                        <Button variant="outlined" onClick={()=> navigate(`/customer/order/${order.id}`)} >View</Button>
