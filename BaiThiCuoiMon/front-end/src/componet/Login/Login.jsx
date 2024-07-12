@@ -22,7 +22,7 @@ const Login = () => {
             console.log(data.data)
               localStorage.setItem("user", data.data.id)
               ToastSuccess("Login in successfully.")
-              navigate('/admin')
+              navigate('/admin/blog')
          
       }catch {
         ToastError("Please try again.")

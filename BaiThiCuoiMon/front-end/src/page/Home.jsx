@@ -37,7 +37,7 @@ const Home = () => {
         <div className="header-area index-01 header-slider-init">
             <div className="single-slid-item">
                 <div className="container custom-header-container bg"
-                    style={{ backgroundImage: `url(${blog[0]?.images[0].url})` }}
+                    style={{ backgroundImage: `url(${blog[0]?.images[0]?.url})` }}
 >
                     <div className="row h-100">
                         <div className="col-lg-12 position-relative h-100">
@@ -68,7 +68,7 @@ const Home = () => {
                                 <a onClick={()=> navigate(`/blog/${item.id}`)}>{item.name}</a>
                             </h2>
                             <div className="img-box">
-                                <img src={item.images[0].url} alt="image"/>
+                                <img src={item?.images[0]?.url} alt="image"/>
                             </div>
                             <div className="content-bottom">
                                 <p className="info">{item.description} </p>
