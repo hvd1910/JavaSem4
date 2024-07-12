@@ -4,9 +4,10 @@ import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import axios from 'axios';
 import { ToastError, ToastSuccess } from '../notification';
+import { useNavigate } from 'react-router';
 
 const Createblog = () => {
-
+  const navigate = useNavigate()
   const userId = localStorage.getItem('user')
 
     const handleEditorChange = (event, editor) => {
@@ -66,19 +67,29 @@ const Createblog = () => {
 
     addblog(postData)
 
+    
+
+  async function addimage(id, imagesdata) {
+      try{
+         const data = await axios.post(`http://localhost:8080/api/places/${id}/images`, imagesdata)
+         ToastSuccess("Add Blog successfully.")
+          navigate("/admin/blog")
+        }catch {
+        ToastError("Please try again.")
+        }
+                }
     async function addblog(blogdata) {
       try{
         const data = await axios.post(`http://localhost:8080/api/places`, blogdata) 
-            console.log(data.data)
-            if(data.data !== null) {
-              const imagesdata= images.map(image => ({ image_path: image, place_id:  data.data.id}))
-              console.log(imagesdata)
-              ToastSuccess("Add Blog in successfully.")
+            if(data.data.id !== null) {
+              const imagesdata= images.map(image => ({ url: image, place_id:  data.data.id}))
+              if(data.data.id !== null) {
+                addimage(data.data.id, imagesdata)
+              }
+            
             }
               
-         
       }catch {
-        ToastError("Please try again.")
       }
     }
     
