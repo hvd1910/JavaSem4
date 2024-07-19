@@ -3,11 +3,11 @@ package org.example.bookap22.Controller;
 import org.example.bookap22.Entity.Order;
 import org.example.bookap22.Service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+
 
 @RestController
 @RequestMapping("/api/v1/orders")
@@ -16,45 +16,33 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
+    @PostMapping
+    public Order createOrder(@RequestBody Order order) {
+        return orderService.saveOrder(order);
+    }
+
+    @GetMapping("/user/{userId}")
+    public List<Order> getOrdersByUserId(@PathVariable Long userId) {
+        return orderService.getOrdersByUserId(userId);
+    }
+
     @GetMapping
     public List<Order> getAllOrders() {
-        return orderService.findAll();
+        return orderService.getAllOrders();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Order> getOrderById(@PathVariable Long id) {
-        Optional<Order> order = orderService.findById(id);
-        return order.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
-    }
-
-    @PostMapping
-    public Order createOrder(@RequestBody Order order) {
-        return orderService.save(order);
+    public Optional<Order> getOrderById(@PathVariable Long id) {
+        return orderService.getOrderById(id);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Order> updateOrder(@PathVariable Long id, @RequestBody Order orderDetails) {
-        Optional<Order> order = orderService.findById(id);
-        if (order.isPresent()) {
-            Order updatedOrder = order.get();
-            updatedOrder.setBook(orderDetails.getBook());
-            updatedOrder.setPublisher(orderDetails.getPublisher());
-            updatedOrder.setUser(orderDetails.getUser());
-            updatedOrder.setOrderDate(orderDetails.getOrderDate());
-            return ResponseEntity.ok(orderService.save(updatedOrder));
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    public Order updateOrder(@PathVariable Long id, @RequestBody Order orderDetails) {
+        return orderService.updateOrder(id, orderDetails);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteOrder(@PathVariable Long id) {
-        Optional<Order> order = orderService.findById(id);
-        if (order.isPresent()) {
-            orderService.deleteById(id);
-            return ResponseEntity.noContent().build();
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    public void deleteOrder(@PathVariable Long id) {
+        orderService.deleteOrder(id);
     }
 }

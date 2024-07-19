@@ -32,6 +32,7 @@ public class SecurityConfig {
                                 .requestMatchers(HttpMethod.GET, "/api/v1/publishers").permitAll()
 
                                 .requestMatchers(HttpMethod.GET, "/api/v1/orders").hasRole("EMPLOYEE")
+                                .requestMatchers(HttpMethod.GET, "/api/v1/orders/**").hasRole("EMPLOYEE")
                                 .requestMatchers(HttpMethod.POST, "/api/v1/orders").hasRole("EMPLOYEE")
                                 .requestMatchers(HttpMethod.PUT, "/api/v1/orders/**").hasRole("EMPLOYEE")
                                 .requestMatchers(HttpMethod.DELETE, "/api/v1/orders/**").hasRole("EMPLOYEE")

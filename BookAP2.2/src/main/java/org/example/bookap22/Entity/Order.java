@@ -3,21 +3,24 @@ package org.example.bookap22.Entity;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
+@Table(name = "orders")
 public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "book_id", nullable = false)
-    private Book book;
+    @ManyToMany
+    @JoinTable(
+            name = "order_books",
+            joinColumns = @JoinColumn(name = "order_id"),
+            inverseJoinColumns = @JoinColumn(name = "book_id")
+    )
+    private Set<Book> books;
 
-    @ManyToOne
-    @JoinColumn(name = "publisher_id", nullable = false)
-    private Publisher publisher;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
@@ -29,10 +32,9 @@ public class Order {
     // Getters and Setters
 
 
-    public Order(Long id, Book book, Publisher publisher, AppUser user, LocalDateTime orderDate) {
+    public Order(Long id, Set<Book> books, AppUser user, LocalDateTime orderDate) {
         this.id = id;
-        this.book = book;
-        this.publisher = publisher;
+        this.books = books;
         this.user = user;
         this.orderDate = orderDate;
     }
@@ -48,20 +50,12 @@ public class Order {
         this.id = id;
     }
 
-    public Book getBook() {
-        return book;
+    public Set<Book> getBooks() {
+        return books;
     }
 
-    public void setBook(Book book) {
-        this.book = book;
-    }
-
-    public Publisher getPublisher() {
-        return publisher;
-    }
-
-    public void setPublisher(Publisher publisher) {
-        this.publisher = publisher;
+    public void setBooks(Set<Book> books) {
+        this.books = books;
     }
 
     public AppUser getUser() {
